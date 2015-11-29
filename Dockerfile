@@ -18,9 +18,10 @@ RUN a2dissite 000-default && a2ensite php7
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+RUN rm -rf /www
 VOLUME /www
+ADD www /www
 
 EXPOSE 80
 
 CMD ["/run.sh"]
-
