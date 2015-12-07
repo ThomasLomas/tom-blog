@@ -6,5 +6,19 @@ This was originally based on [https://github.com/eko/docker-symfony], but has be
 
 Thanks for taking the time to read. There are probably a lot more elegant ways of doing what I have done, but this was all part of the learning curve.
 
+To run tests:
+
+1. Install the phpunit/phpunit container:
+
+    ``` sh
+    $ docker pull phpunit/phpunit
+    ```
+
+2. Run PHPUnit through the PHPUnit container:
+
+    ``` sh
+    $ docker run -v $(pwd)/www:/app phpunit/phpunit tests/AppBundle/
+    ```
+
 Any questions, feel free to get in touch.
 
