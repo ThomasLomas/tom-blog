@@ -17,3 +17,4 @@
 !www/var/SymfonyRequirements.php
 /www/vendor/
 /www/web/bundles/
+/logs

@@ -1,14 +1,17 @@
-FROM debian:jessie
+FROM centos:7
 
-RUN apt-get update && apt-get install -y php5-common php5-cli php5-fpm php5-mcrypt php5-apcu php5-gd php5-imagick php5-curl php5-intl
+RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+RUN rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
 
-ADD site.ini /etc/php5/fpm/conf.d/
-ADD site.ini /etc/php5/cli/conf.d/
+RUN yum update -y && yum install -y php70w php70w-opcache php70w-common php70w-cli php70w-fpm php70w-intl php70w-mcrypt php70w-xml php70w-process
 
-ADD site.pool.conf /etc/php5/fpm/pool.d/
+ADD site.ini /etc/php.d/
 
-RUN usermod -u 1000 www-data
+RUN rm -rf /etc/php-fpm.d/*
+ADD site.pool.conf /etc/php-fpm.d/
 
-CMD ["php5-fpm", "-F"]
+RUN useradd -u 1000 www-data
+
+CMD ["php-fpm", "-F"]
 
 EXPOSE 9000
